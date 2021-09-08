@@ -6,7 +6,7 @@ PUT /es-product-demo
 {
   "settings": {
     "number_of_shards": 2,
-    "number_of_replicas": 3
+    "number_of_replicas": 2
   },
   "mappings": {
     "properties": {
@@ -349,7 +349,7 @@ PUT /es-product-nested-reviews-demo
 {
   "settings": {
     "number_of_shards": 2,
-    "number_of_replicas": 3
+    "number_of_replicas": 2
   },
   "mappings": {
     "properties": {
