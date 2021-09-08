@@ -95,6 +95,49 @@ GET /es-product-demo/_analyze
 }
 ```
 
+## Analyse HTML with Email Text Field
+### The goal is to get the text to only contain the upper case version of the emails
+#### Standard Analysing
+```
+GET /es-product-demo/_analyze
+{
+  "text": "<a href='mailto:info@mycompany.com'>Info@mycompany.com | Sales@MyCompany.com</a>",
+  "char_filter": [],
+  "tokenizer": "standard",
+  "filter": ["lowercase"]
+}
+```
+#### Strip HTML elements
+```
+GET /es-product-demo/_analyze
+{
+  "text": "<a href='mailto:info@mycompany.com'>Info@mycompany.com | Sales@MyCompany.com</a>",
+  "char_filter": ["html_strip"],
+  "tokenizer": "standard",
+  "filter": ["lowercase"]
+}
+```
+#### Use the Email tokenizer
+```
+GET /es-product-demo/_analyze
+{
+  "text": "<a href='mailto:info@mycompany.com'>Info@mycompany.com | Sales@MyCompany.com</a>",
+  "char_filter": ["html_strip"],
+  "tokenizer": "uax_url_email",
+  "filter": ["lowercase"]
+}
+```
+#### Uppercase all tokens with a token filter
+```
+GET /es-product-demo/_analyze
+{
+  "text": "<a href='mailto:info@mycompany.com'>Info@mycompany.com | Sales@MyCompany.com</a>",
+  "char_filter": ["html_strip"],
+  "tokenizer": "uax_url_email", 
+  "filter": ["uppercase"]
+}
+```
+
 ## Analyse Keyword Field
 #### Analyses the text `SHIRT !red!` --> `["SHIRT !red!"]` since the `tags` property is of type `keyword` which executes in the Filter Context
 ```
